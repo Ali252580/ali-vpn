@@ -1,0 +1,44 @@
+Firefox VPN برای ویندوز — راهنما
+=================================
+
+فایل‌ها:
+  fox-proxy.exe   ← خود برنامه
+  فیلترشکن.bat    ← فقط دابل‌کلیک کن؛ تا وقتی پنجره باز است VPN وصل است
+  راهنمای فارسی.txt ← همین فایل
+
+چطور وصل بشم؟
+--------------
+1. دابل‌کلیک روی «فیلترشکن.bat»
+2. اگر بدون خطا بالا آمد و نوشت SOCKS5 proxy started یعنی وصل است
+3. در مرورگر Firefox:
+   تنظیمات → General → Network Settings → Settings...
+   گزینه Manual proxy configuration را بزن
+   SOCKS Host: 127.0.0.1     Port: 1080
+   نوع: SOCKS v5
+   تیک «Proxy DNS when using SOCKS v5» را بزن → OK
+4. برای قطع، فقط پنجره سیاه را ببند
+
+تغییر کشور
+----------
+فایل «فیلترشکن.bat» را با Notepad باز کن و عبارت Netherlands را با یکی از این‌ها عوض کن
+(باید دقیقاً همین拼写 باشد):
+
+  Germany / France / United Kingdom / United States / Japan / Canada
+  Austria / Belgium / Norway / Sweden / Spain / Denmark / Finland
+  Netherlands / Singapore / Malaysia / Brazil / South Africa
+
+لیست کامل سرورها:
+  cmd را باز کن → بنویس:
+    cd C:\Users\admin\Downloads
+    fox-proxy.exe -print-info
+
+موارد مهم
+---------
+* سهمیه ماهانه: ۵۰ گیگ؛ الان حدود ۴۱ گیگ مانده. در ۱ دسامبر ماهانه تجدید می‌شود.
+* ورود مجدد با اکانت دیگر:
+    cd C:\Users\admin\Downloads
+    fox-proxy.exe -login -print-info
+* این کلاینت غیررسمی است؛ اگر Mozilla سمت خودش چیزی عوض کند ممکن است
+  دوباره خراب شود و باید نسخه جدید کامپایل شود.
+* برای مشاهده وضعیت لحظه‌ای (آی‌پی خروجی)، در cmd:
+    curl.exe --ssl-no-revoke --socks5-hostname 127.0.0.1:1080 https://www.cloudflare.com/cdn-cgi/trace
